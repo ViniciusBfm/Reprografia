@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link href="../static/css/index.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reprografia - Professor</title>
+    <!-- Tabelas-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-info">
+            <img class="menu-btn" src="../static/image/menu.png" alt="">
+            <h1>Reprografia</h1>
+        </div>
+        <div class="header-perfil">
+            <h6>Usuário: {{ nome_usuario }}</h6>
+            <form action="{{ url_for('logout') }}" method="post">
+                <button type="submit" style="background: none; border: none; padding: 0; margin: 0; cursor: pointer;">
+                    <img src="../static/image/sair.png" alt="Sair">
+                </button>
+            </form>
+            
+        </div>
+    </header>
+    <section class="menu-infos">
+        <nav class="menu" id="menu">
+            <ul>
+                <ul class="menu-box" >
+                    <h3 class="localizar">Dashboard</h3>
+                    <li class="menudiv1 active" onclick="toggleMenu(this)">
+                        <div class="menu-a1" href="#solicitacao">
+                            <div>
+                                <img class="iconeimg" src="../static/image/solicitação.png" alt="">
+                                <a class="link1" >Solicitação</a>
+                            </div>
+                            <img class="setaimg" src="../static/image/seta-direita.png" alt="">
+                        </div>
+                    </li>
+                </ul>                         
+            </ul>
+        </nav>
+        
+        <div class="infos" id="infos">
+            <div id="solicitacao" class="conteudo">
+                <div class="solicitacao-container">
+                    <div class="titulo">
+                        <div>
+                            <h1>Solicitação</h1>
+                        </div>
+                        
+                    </div>
+
+                    <div class="solicitar-container">
+                        <div class="solicitar-box" href="#solicitar">
+                            <div>
+                                <h3>Solicitar impressão</h3>
+                                <p>Clique aqui</p>
+                            </div>
+                            <img src="../static/image/solicitar.png" alt="todas solicitações">
+                        </div>
+                        <div class="solicitar-box"  href="#todassolicitacoes">
+                            <div>
+                                <h3>Todas solicitações</h3>
+                                <p>{{ total_solicitacoes }} solicitações</p>
+                            </div>
+                            
+                            <img src="../static/image/todas_solicitacoes.png" alt="todas solicitações">
+                        </div>
+                        <div class="solicitar-box" href="#aprovadassolicitacoes">
+                            <div>
+                                <h3>Solicitações aprovadas</h3>
+                                <p>{{ total_solicitacoes_aprovadas }} aprovadas</p>
+                            </div>                           
+                            <img src="../static/image/aprovadas.png" alt="Solicitações aprovadas">
+                        </div>
+                        <div class="solicitar-box" href="#pendentessolicitacoes">
+                            <div>
+                                <h3>Solicitações pendentes</h3>
+                                <p>{{ total_solicitacoes_pendente }} pendentes</p>
+                            </div>                  
+                            <img src="../static/image/pendentes.png" alt="Solicitações pendentes">
+                        </div>
+                    </div>
+
+                    <div class="solicitar-form">
+                        <div id="infos2-solicitacao" class="infos2">
+                            <div id="solicitar" class="conteudo2">
+                                <h2 style="color: #0061f2;">Solicitar impressão</h2>
+                                <form action="{{ url_for('processar_solicitacao') }}" method="post" enctype="multipart/form-data">
+                                    <div class="solicitar-paginas">
+                                        <div>
+                                            <p>Número de Páginas:</p>
+                                            <input type="number" name="numPaginas" required placeholder="Digite o número de páginas">
+                                        </div>
+                                        <div>
+                                            <p>Número de Cópias:</p>
+                                            <input type="number" name="numCopias" required placeholder="Digite o número de cópias">
+                                        </div>
+                                    </div>
+                  
+                   
+        
+                                    <div class="solicitar-paginas">
+                                        <div>
+                                            <p>Setor:</p>
+                                            <select name="sala" required>
+                                                <option value="" disabled selected>Escolha a sala</option>
+                                                {% for sala in sala_opcao %}
+                                                    <option value="{{ sala }}">{{ sala }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <p>Cor:</p>
+                                            <select name="cor" required>
+                                                {% for cor in cor_opcao %}
+                                                    <option value="{{ cor }}">{{ cor }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+        
+                                    <div class="solicitar-paginas">
+                                        <div class="data">
+                                            <label for="data">Data e Hora para a solicitação:</label>
+                                            <input type="datetime-local" name="data" required>
+                                        </div>
+                                        <div>
+                                            <p>Arquivo para impressão:</p>
+                                            <label for="arquivo" class="file-upload-container">
+                                                <div class="file-upload-button">Selecionar Arquivo</div>
+                                                <input type="file" name="arquivo" id="arquivo" accept=".pdf, .doc, .docx" required class="file-input">
+                                                <div class="file-name" id="file-name">Nenhum arquivo selecionado</div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <input type="submit" value="Enviar Solicitação">
+                                </form>
+                            </div>
+                            <div id="todassolicitacoes" class="conteudo2">
+                                <h2 style="color: #6900c7;">Todas solicitações</h2>
+                                <table id="solicitacoes-table" class="display">
+                                    <thead>
+                                        <tr>
+                                            <th>Data</th>
+                                            <th>Total de paginas</th>
+                                            <th>Setor</th>
+                                            <th>Cor</th>
+                                            <th>Data para imprimir</th>
+                                            <th>Baixar</th>                
+                                            <th>Status</th>
+                                            <th>Aprovação</th>
+                                            <th>Excluir</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for solicitacao in solicitacoes %}
+                                        <tr>
+                                            <td>{{ solicitacao[8] }}</td>
+                                            <td>{{ solicitacao[3] }}</td>
+                                            <td>{{ solicitacao[4] }}</td>
+                                            <td>{{ solicitacao[5] }}</td>
+                                            <td>{{ solicitacao[6] }}</td>
+                                            <td>
+                                                {% if solicitacao[8] %}
+                                                    <a href="{{ url_for('download_arquivo', solicitacao_id=solicitacao[0]) }}">Download</a>
+                                                {% else %}
+                                                    Sem arquivo
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ solicitacao[13] }}</td>
+                                            <td>
+                                                {% if solicitacao[15] == None %}
+                                                    Aguardando
+                                                {% else %}
+                                                    {{ solicitacao[15] }}
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <form method="post" action="{{ url_for('excluir_solicitacao', solicitacao_id=solicitacao[0]) }}" onsubmit="return confirm('Tem certeza que deseja excluir?');">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <button type="submit" style="background-color: red;">Excluir</button>
+                                                </form>
+                                            </td>
+                                            
+                                            
+                                        </tr>
+                                        {% endfor %}
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="aprovadassolicitacoes" class="conteudo2">
+                                <h2 style="color: #00ac69;">Solicitações aprovadas</h2>
+                                    <table id="aprovadas-table" class="display">
+                                        <thead>
+                                            <tr>
+                                                <th>Data</th>
+                                                <th>Total de paginas</th>
+                                                <th>Sala</th>
+                                                <th>Cor</th>
+                                                <th>Data para imprimir</th>
+                                                <th>Baixar</th>
+                                                <th>Aprovação</th>
+                                                <th>Confirmar impressão</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for solicitacao in solicitacoes_aprovadas_usuario %}
+                                            <tr>
+                                                <td>{{ solicitacao[8] }}</td> 
+                                                <td>{{ solicitacao[3] }}</td>
+                                                <td>{{ solicitacao[4] }}</td>
+                                                <td>{{ solicitacao[5] }}</td>
+                                                <td>{{ solicitacao[6] }}</td>
+                                                <td>
+                                                    {% if solicitacao[8] %}
+                                                        <a href="{{ url_for('download_arquivo', solicitacao_id=solicitacao[0]) }}">Download</a>
+                                                    {% else %}
+                                                        Sem arquivo
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    {% if solicitacao[15] == None %}
+                                                        Aguardando
+                                                    {% else %}
+                                                        {{ solicitacao[15] }}
+                                                    {% endif %}
+                                                </td>
+                                                <td>{{ solicitacao[16] }}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>       
+                                    </table>     
+                            </div>
+                            <div id="pendentessolicitacoes" class="conteudo2">
+                                <h2 style="color: #f4a100;">Solicitações pendentes</h2>
+                                <table id="pendentes-table" class="display">
+                                    <thead>
+                                        <tr>
+                                            <th>Data</th>
+                                            <th>Total de paginas</th>
+                                            <th>Sala</th>
+                                            <th>Cor</th>
+                                            <th>Data para imprimir</th>
+                                            <th>Baixar</th>
+                                            <th>Status</th>
+                                            <th>Excluir</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for solicitacao in solicitacoes_aguardando_usuario %}
+                                        <tr>
+                                            <td>{{ solicitacao[8] }}</td> 
+                                            <td>{{ solicitacao[3] }}</td>
+                                            <td>{{ solicitacao[4] }}</td>
+                                            <td>{{ solicitacao[5] }}</td>
+                                            <td>{{ solicitacao[6] }}</td>
+                                            <td>
+                                                {% if solicitacao[8] %}
+                                                    <a href="{{ url_for('download_arquivo', solicitacao_id=solicitacao[0]) }}">Download</a>
+                                                {% else %}
+                                                    Sem arquivo
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ solicitacao[13] }}</td>
+                                            <td>
+                                                <form method="post" action="{{ url_for('excluir_solicitacao', solicitacao_id=solicitacao[0]) }}" onsubmit="return confirm('Tem certeza que deseja excluir?');">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <button type="submit" style="background-color: red;">Excluir</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>                                   
+                                </table>
+                            </div>
+
+                        </div>       
+                    </div>                 
+                </div>    
+            </div>
+        </div>
+    </section>
+    
+    <h1>Minhas solicitações</h1>
+    <table>
+        
+    
+        
+    </table>
+
+    <h1>Solicitações Aprovadas</h1>
+
+    <table>
+        <tr>
+            <th>Data</th>
+            <th>N° de Paginas</th>
+            <th>N° de copias</th>
+            <th>N° total</th>
+            <th>Sala</th>
+            <th>Cor</th>
+            <th>Data para imprimir</th>
+            <th>Usuário</th>
+        </tr>
+
+        {% for solicitacao in solicitacoes_aprovadas_usuario %}
+        <tr>
+            <td>{{ solicitacao[8] }}</td> 
+            <td>{{ solicitacao[1] }}</td>
+            <td>{{ solicitacao[2] }}</td>
+            <td>{{ solicitacao[3] }}</td>
+            <td>{{ solicitacao[4] }}</td>
+            <td>{{ solicitacao[5] }}</td>
+            <td>{{ solicitacao[6] }}</td>
+            <td>{{ solicitacao[7] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <h1>Solicitações Aguardando</h1>
+
+    <table>
+        <tr>
+            <th>Data</th>
+            <th>N° de Paginas</th>
+            <th>N° de copias</th>
+            <th>N° total</th>
+            <th>Sala</th>
+            <th>Cor</th>
+            <th>Data para imprimir</th>
+            <th>Status</th>
+        </tr>
+
+        {% for solicitacao in solicitacoes_aguardando_usuario %}
+        <tr>
+            <td>{{ solicitacao[8] }}</td> 
+            <td>{{ solicitacao[1] }}</td>
+            <td>{{ solicitacao[2] }}</td>
+            <td>{{ solicitacao[3] }}</td>
+            <td>{{ solicitacao[4] }}</td>
+            <td>{{ solicitacao[5] }}</td>
+            <td>{{ solicitacao[6] }}</td>
+            <td>{{ solicitacao[13] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+
+
+
+</body>
+<script>
+    history.pushState(null, null, 'pagina_nao_autenticada');
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, 'pagina_nao_autenticada');
+    });
+    //Menu
+    document.addEventListener("DOMContentLoaded", function () {
+        var menuLinks = document.querySelectorAll(".menu-a1 ");
+        var infos = document.getElementById("infos");
+
+        function mostrarConteudo(id) {
+            // Oculta todos os conteúdos
+            var conteudos = document.querySelectorAll('.conteudo');
+            conteudos.forEach(function (conteudo) {
+                conteudo.style.display = 'none';
+            });
+
+            // Exibe o conteúdo relevante
+            var conteudoSelecionado = document.getElementById(id);
+            conteudoSelecionado.style.display = 'block';
+        }
+
+        // Adiciona um ouvinte de evento para cada link do menu
+        var linksMenu = document.querySelectorAll('.menu-a1');
+        linksMenu.forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                event.preventDefault(); // Impede o comportamento padrão do link
+                var href = link.getAttribute('href').substring(1); // Remove o caractere '#' do href
+                mostrarConteudo(href);
+            });
+        });
+
+            // Mostra o conteúdo relacionado a IP inicialmente
+            mostrarConteudo('solicitacao');
+    });
+    
+    //alterar a cor do menu
+    function toggleMenu(element) {
+        // Remove a classe 'active' de todos os elementos com a classe 'menudiv1'
+        var menudiv1Elements = document.querySelectorAll('.menudiv1');
+        menudiv1Elements.forEach(function (el) {
+            el.classList.remove('active');
+            el.querySelector('.link1').style.color = ''; // Volta para a cor padrão
+            el.querySelector('.link1').style.fontWeight = ''; // Volta para o estilo de fonte padrão
+        });
+
+        // Adiciona a classe 'active' apenas ao elemento clicado
+        element.classList.add('active');
+
+        // Altera a cor do texto e o estilo de fonte do elemento clicado
+        var linkElement = element.querySelector('.link1');
+        linkElement.style.color = '#0b57ed';
+        linkElement.style.fontWeight = 'bold';
+    }
+
+    // Adiciona a classe 'active' ao primeiro elemento por padrão
+    document.addEventListener('DOMContentLoaded', function() {
+        var defaultActiveElement = document.querySelector('.menudiv1');
+        toggleMenu(defaultActiveElement);
+    });
+    // mostrar o nome do input de selecionar arquivos
+    document.getElementById('arquivo').addEventListener('change', function(e) {
+        var fileName = e.target.files[0].name;
+        document.getElementById('file-name').innerText = fileName;
+    });
+
+    //Menu - SOLICITAÇÃO 
+    document.addEventListener("DOMContentLoaded", function () {
+        var menuLinks2 = document.querySelectorAll(".solicitar-container .solicitar-box");
+        var infos = document.getElementById("infos2-solicitacao");
+
+        function mostrarConteudo(id) {
+            // Oculta todos os conteúdos
+            var conteudos2 = document.querySelectorAll('.conteudo2');
+            conteudos2.forEach(function (conteudo) {
+                conteudo.style.display = 'none';
+            });
+
+            // Exibe o conteúdo relevante
+            var conteudoSelecionado2 = document.getElementById(id);
+            conteudoSelecionado2.style.display = 'block';
+        }
+
+    // Adiciona um ouvinte de evento para cada link do menu
+    var linksMenu2 = document.querySelectorAll('.solicitar-container .solicitar-box');
+    linksMenu2.forEach(function (link) {
+        link.addEventListener('click', function (event) {
+            event.preventDefault(); // Impede o comportamento padrão do link
+            var href = link.getAttribute('href').substring(1); // Remove o caractere '#' do href
+            mostrarConteudo(href);
+        });
+    });
+
+        // Mostra o conteúdo relacionado a IP inicialmente
+        mostrarConteudo('solicitar');
+    });
+
+    //Solicitações aprovadas tabela 
+    $(document).ready(function () {
+        // Inicialize DataTable para a tabela de solicitações
+        $('#solicitacoes-table').DataTable({
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.10.25/i18n/Portuguese-Brasil.json'
+            },
+            order: [[0, 'desc']] // 6 é o índice da coluna de data, 'desc' para ordenação descendente
+            // Adicione outras opções de DataTables conforme necessário
+        });
+
+        // Inicialize DataTable para a tabela de aprovações
+        $('#aprovadas-table').DataTable({
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.10.25/i18n/Portuguese-Brasil.json'
+            },
+            order: [[0, 'desc']] // 0 é o índice da coluna de data, 'desc' para ordenação descendente
+            // Adicione outras opções de DataTables conforme necessário
+        });
+
+        // Inicialize DataTable para a tabela de pendentes
+        $('#pendentes-table').DataTable({
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.10.25/i18n/Portuguese-Brasil.json'
+            },
+            order: [[0, 'desc']] // 0 é o índice da coluna de data, 'desc' para ordenação descendente
+            // Adicione outras opções de DataTables conforme necessário
+        });
+
+        $('#usuarios-table').DataTable({
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.10.25/i18n/Portuguese-Brasil.json'
+            },
+            order: [[0, 'desc']] // 0 é o índice da coluna de data, 'desc' para ordenação descendente
+            // Adicione outras opções de DataTables conforme necessário
+        });
+
+        $('#redefinir-table').DataTable({
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.10.25/i18n/Portuguese-Brasil.json'
+            },
+            order: [[0, 'asc']] // 0 é o índice da coluna de data, 'desc' para ordenação descendente
+            // Adicione outras opções de DataTables conforme necessário
+        });
+
+        // Adicione o atributo placeholder usando jQuery
+        $('.dataTables_filter input').prop('placeholder', 'Pesquisar...');
+
+        // Ou, se preferir usar attr
+        $('.dataTables_filter input').attr('placeholder', 'Pesquisar...');
+    });
+    //menu sumir
+    document.addEventListener('DOMContentLoaded', function () {
+        var menubtn = document.querySelector(".menu-btn");
+        var menu = document.querySelector(".menu");
+
+        menubtn.addEventListener('click', function () {
+            // Alternar a visibilidade do menu
+            if (menu.style.display === 'none' || menu.style.display === '') {
+                menu.style.display = 'block';
+            } else {
+                menu.style.display = 'none';
+            }
+        });
+    });
+</script>
+</html>

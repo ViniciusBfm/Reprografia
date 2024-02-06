@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="../static/css/login.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image-x/png" href="../static/image/icone.ico">
+    <title>Login - Reprografia</title>
+</head>
+<body>
+
+    <form action="/autenticar" method="post" class="forms">    
+        <div class="forms-inputs">
+            <h1>Login</h1>
+            <label for="nome_usuario">Nome e sobrenome</label>
+            <input placeholder="Nome e sobrenome" type="text" name="nome_usuario" required><br>
+
+            <label for="senha">Senha</label>
+            <input placeholder="Senha" type="password" name="senha" required><br> 
+            <input type="submit" value="Entrar"> 
+        </div>
+        
+        <div class="forms-create">
+            <div class="forms-info">
+                <!-- Adicione mensagens de erro aqui -->
+                {% if erro_login %}
+                    <p style="color: red;">{{ erro_login }}</p>
+                {% endif %}
+                {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div>
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+            </div>
+            <a href="{{ url_for('esqueci_minha_senha') }}">Esqueceu a senha?</a>
+            <a href="{{ url_for('registro') }}">Não tem uma conta?</a>
+        </div>
+       
+
+    </form>
+
+
+</body>
+</html>

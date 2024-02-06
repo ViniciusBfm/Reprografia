@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="../static/css/login.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esqueci Minha Senha</title>
+</head>
+<body>
+
+<form action="/esqueci_minha_senha" method="post" class="forms">
+    <div class="forms-esqueceu-titulo">
+        <h1>Esqueceu sua Senha?</h1>
+        <p>Nós entendemos, coisas acontecem. Basta inserir seu <b>nome e sobrenome</b>  abaixo e iremos redefinir sua senha!</p>
+    </div>
+
+    <div class="forms-esqueceu-inputs">
+        <label for="nome_usuario">Nome e sobrenome:</label>
+        <input placeholder="Insira seu nome e sobrenome" type="text" name="nome_usuario" required><br>   
+        <input type="submit" value="Verificar nome">
+    </div>
+
+    <div class="forms-esqueceu-links">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <p style="color: rgb(206, 24, 24); text-align: center; font-size: 12px;">{{ messages[0] }}</p>
+            {% endif %}
+        {% endwith %}
+    
+        <a href="{{ url_for('registro') }}">Não tem uma conta?</a>
+    
+        <a href="{{ url_for('login') }}">Já tem uma conta? Conecte-se!</a>
+    </div>
+</form>
+
+
+
+</body>
+</html>

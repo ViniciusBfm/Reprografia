@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300;400;500&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+a{
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+/* Para navegadores WebKit (Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 6px; /* Largura da barra de rolagem */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #4e73df; /* Cor da thumb (a "alça" da barra de rolagem) */
+    border-radius: 6px; /* Bordas arredondadas da thumb */
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f8f9fc; /* Cor do track (a área de fundo da barra de rolagem) */
+    scrollbar-color: #4e73df #f8f9fc;
+}
+html,
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../image/login3.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.forms{
+    width: 80%;
+    max-width: 400px;
+    height: auto;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border: 1px solid gray;
+    background-color: rgba(255, 255, 255, 0.74); /* Cor de fundo com transparência para o efeito de vidro */
+    backdrop-filter: blur(5px); /* Aplica o efeito de desfoque */
+    border-radius: 8px;
+    -webkit-box-shadow: 6px 6px 15px -6px rgba(0,0,0,0.71); 
+    box-shadow: 6px 6px 15px -6px rgba(0,0,0,0.71);
+    font-family: 'Open Sans', sans-serif;
+
+}
+.forms h1, .forms2 h1{
+    font-size: 25px;
+    margin-bottom: 10px;
+    font-family: 'Signika Negative', sans-serif;
+    font-weight: normal;
+}
+.forms input[type=text], input[type=password], .forms2-line-box1 input[type=text], .forms2-line-box2 input[type=number], .forms2-line2-box2 input[type=password]{
+    padding-left: 8px;
+    font-size: 16px;
+}
+.forms input{
+    width: 100%;
+    height: 45px;
+    border-radius: 8px;
+    border: 0;
+    outline: 0;
+}
+.forms input[type=submit], .forms2 input[type=submit]{
+    cursor: pointer;
+    background-color: #0061f2;
+    color: white;
+    font-size: 19px;
+    font-family: 'Signika Negative', sans-serif;
+}
+.forms input[type=submit]:hover, .forms2-line2-box2 input[type=submit]:hover{
+    background-color: #164de9;
+    transition: 650ms;
+}
+a{
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
+}
+.forms-inputs{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.forms label, .forms2 label{
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+.forms-create{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+/*esqueci a senha*/
+.forms p {
+    font-size: 14px;
+}
+.forms2{
+    width: 90%;
+    max-width: 500px;
+    height: 75%;
+    max-height: 550px;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border: 1px solid gray;
+    background-color: rgba(255, 255, 255, 0.514); /* Cor de fundo com transparência para o efeito de vidro */
+    backdrop-filter: blur(5px); /* Aplica o efeito de desfoque */
+    border-radius: 8px;
+    -webkit-box-shadow: 6px 6px 15px -6px rgba(0,0,0,0.71); 
+    box-shadow: 6px 6px 15px -6px rgba(0,0,0,0.71);
+    font-family: 'Open Sans', sans-serif;
+}
+.forms2 input{
+    height: 40px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 0;
+    outline: 0;
+}
+.forms2-line{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.forms2-line-box2, .forms2-line-box1{
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.forms2 input[type=submit]{
+    width: 100%;
+}
+.forms2-line2{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.forms2-line2 select{
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    border: 0;
+    border-radius: 8px;
+    padding-left: 8px;
+}
+.forms2-line2 select option{
+    margin-top: 10px;
+}
+.forms2-line3{
+    display: flex;
+    flex-direction: column;
+}
+.forms2-line3 a{
+    margin: 5px 0;
+}
+.forms-info{
+    margin: 10px 0;
+}
+.forms-esqueceu-titulo{
+    width: 100%;
+    height: 40%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+.forms-esqueceu-titulo p{
+    font-size: 16px;
+}
+.forms-esqueceu-inputs{
+    width: 100%;
+    height: 40%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.forms-esqueceu-links{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+.forms-info p{
+    margin: 5px 0;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}

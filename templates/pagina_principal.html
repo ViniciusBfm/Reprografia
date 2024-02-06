@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Pagina inicial </h2>
+    <form action="{{ url_for('logout') }}" method="post">
+        <button type="submit">Sair</button>
+    </form>
+    <h1>{{ conteudo_personalizado }}</h1>
+</body>
+<script>
+    history.pushState(null, null, 'pagina_nao_autenticada');
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, 'pagina_nao_autenticada');
+    });
+</script>
+
+</html>
