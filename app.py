@@ -261,6 +261,8 @@ def processar_solicitacao():
     finally:
         conn.close()
 
+
+
 #Rota para download
 @app.route('/download-arquivo/<int:solicitacao_id>')
 def download_arquivo(solicitacao_id):
@@ -765,10 +767,33 @@ if __name__ == '__main__':
             
         );
     ''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS cortadora (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            num_paginas INTEGER NOT NULL,
+            num_copias INTEGER NOT NULL,
+            num_total INTEGER NOT NULL,
+            sala TEXT NOT NULL,
+            cor TEXT,
+            nome_usuario TEXT NOT NULL,
+            atual DATETIME NOT NULL,
+            arquivo BLOB,
+            extensao TEXT,
+            funcao_usuario TEXT NOT NULL,
+            id_usuario INTEGER NOT NULL,
+            status TEXT DEFAULT 'pendente',
+            usuario_aprovador_id INTEGER,
+            nome_usuario_aprovador TEXT,
+            confirmar TEXT DEFAULT 'Não impresso',
+            FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
+            FOREIGN KEY (usuario_aprovador_id) REFERENCES usuarios(id)
+            
+        );
+    ''')
 
 
 
     conn.commit()
     conn.close()
 
-    app.run(debug=True)
+    app.run(host='192.168.8.47', port=5000, debug=True)
