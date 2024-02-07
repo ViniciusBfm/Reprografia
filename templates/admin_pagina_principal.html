@@ -657,7 +657,7 @@
             // Adicione outras opções de DataTables conforme necessário
         });
     });
-    //menu sumir
+    //Menu sumir
     document.addEventListener('DOMContentLoaded', function () {
         var menubtn = document.querySelector(".menu-btn");
         var menu = document.querySelector(".menu");
@@ -670,7 +670,17 @@
                 menu.style.display = 'none';
             }
         });
+
+        // Adiciona um ouvinte de evento de clique ao documento inteiro
+        document.addEventListener("click", (event) => {
+            // Verifica se o clique não ocorreu dentro do menu ou no botão do menu
+            if (!menu.contains(event.target) && event.target !== menubtn) {
+                // Fecha o menu
+                menu.style.display = "none";
+            }
+        });
     });
+
 
     //
     function alterarFuncao(usuarioId) {

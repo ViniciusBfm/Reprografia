@@ -100,6 +100,7 @@ header .header-perfil h6{
     align-items: center;
     position: relative;
     padding: 2%;
+    display: none;
 }
 .menu ul{
     width: 100%;
