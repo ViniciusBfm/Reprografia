@@ -16,5 +16,5 @@ def adicionar_usuario(nome, identificacao, funcao, senha):
     conn.close()
 
 # Adicionar o usuário
-adicionar_usuario('vinicius', '1', 'admin', '1')
+adicionar_usuario(' vinicius mendes', '2', 'admin', '1')
 print('Usuario adicionado!')

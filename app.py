@@ -740,7 +740,7 @@ if __name__ == '__main__':
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
         );
     ''')
-
+    # Criar tabela de solicitações para impressão
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS solicitacoes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
