@@ -12,12 +12,16 @@
     <form action="/autenticar" method="post" class="forms">    
         <div class="forms-inputs">
             <h1>Login</h1>
-            <label for="nome_usuario">Nome e sobrenome</label>
-            <input placeholder="Nome e sobrenome" type="text" name="nome_usuario" required><br>
+            <label for="nome_usuario">Usuário</label>
+            <input placeholder="Usuário" type="text" name="nome_usuario" required><br>
 
             <label for="senha">Senha</label>
-            <input placeholder="Senha" type="password" name="senha" required><br> 
-            <input type="submit" value="Entrar"> 
+            <div class="input-password">
+                <input id="senha" placeholder="Senha" type="password" name="senha" required><br>
+                <button id="mostrarSenha" class="ver-ocultar-senha" type="button"><img class="verocultar" src="../static/image/oculta-senha.png" alt="ver senha"> </button>
+            </div>
+            
+            <input style="margin-top: 15px;" type="submit" value="Entrar"> 
         </div>
         
         <div class="forms-create">
@@ -42,7 +46,6 @@
        
 
     </form>
-
-
 </body>
+<script src="../static/js/index.js"></script>
 </html>

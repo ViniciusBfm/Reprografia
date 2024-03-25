@@ -4,152 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redefinir Senha - Reprografia</title>
+    <link href="../static/css/login.css" rel="stylesheet" />
 </head>
 <body>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Righteous&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300;400;500&display=swap');
-
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-        a{
-            text-decoration: none;
-        }
-        li{
-            list-style: none;
-        }
-
-        html,
-        body {
-            width: 100%;
-            height: 100%;
-        }
-        /* Para navegadores WebKit (Chrome, Safari) */
-        ::-webkit-scrollbar {
-            width: 6px; /* Largura da barra de rolagem */
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background-color: #4e73df; /* Cor da thumb (a "alça" da barra de rolagem) */
-            border-radius: 6px; /* Bordas arredondadas da thumb */
-        }
-
-        ::-webkit-scrollbar-track {
-            background-color: #f8f9fc; /* Cor do track (a área de fundo da barra de rolagem) */
-            scrollbar-color: #4e73df #f8f9fc;
-        }
-        html,
-        body {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-image: url('{{ url_for('static', filename='image/login3.jpg') }}');
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-        .forms{
-            width: 80%;
-            max-width: 400px;
-            height: 65%;
-            max-height: 450px;
-            padding: 2%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            border: 1px solid gray;
-            background-color: rgba(255, 255, 255, 0.74); /* Cor de fundo com transparência para o efeito de vidro */
-            backdrop-filter: blur(5px); /* Aplica o efeito de desfoque */
-            border-radius: 8px;
-            -webkit-box-shadow: 6px 6px 15px -6px rgba(0,0,0,0.71); 
-            box-shadow: 6px 6px 15px -6px rgba(0,0,0,0.71);
-            font-family: 'Open Sans', sans-serif;
-
-        }
-        .forms h1{
-            font-size: 25px;
-            margin-bottom: 10px;
-            font-family: 'Signika Negative', sans-serif;
-            font-weight: normal;
-        }
-        .forms input[type=password]{
-            padding-left: 8px;
-            font-size: 16px;
-            margin: 20px 0;
-        }
-        .forms input{
-            width: 100%;
-            height: 45px;
-            border-radius: 8px;
-            border: 0;
-            outline: 0;
-        }
-        .forms input[type=submit]{
-            cursor: pointer;
-            background-color: #0061f2;
-            color: white;
-            font-size: 19px;
-            font-family: 'Signika Negative', sans-serif;
-        }
-        .forms input[type=submit]:hover{
-            background-color: #164de9;
-            transition: 650ms;
-        }
-        a{
-            text-decoration: none;
-            text-align: center;
-            font-size: 14px;
-        }
-
-        .forms label{
-            font-size: 16px;
-            margin-bottom: 5px;
-        }
-        ul {
-            padding: 0;
-            margin-top: 10px;
-        }
-
-        li {
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-    </style>
-
-    <form action="/redefinir_senha/{{ nome_usuario }}/{{ token }}" method="post" class="forms">
-    <h1>Redefinir Senha</h1>
-
-    <p>Ótimo! Agora, por favor, escolha uma nova senha forte para garantir a segurança da sua conta.</p>
-    
-    <div>
-        <label for="nova_senha">Nova Senha:</label>
-        <input placeholder="Inserir nova senha" type="password" name="nova_senha" required><br>
-    
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <p style="color: green;">{{ messages[0] }}</p>
-            {% endif %}
-        {% endwith %}
-    
+    <form action="/redefinir_senha/{{ token }}"" class="forms forms-redefinir" method="post">      
+        <div>
+            <label for="nova_senha">Nova Senha:</label>
+            <div class="input-password">
+                <input id="senha" type="password" id="nova_senha" name="nova_senha" required>
+                <button id="mostrarSenha" class="ver-ocultar-senha" type="button"><img class="verocultar" src="../static/image/oculta-senha.png" alt="ver senha"> </button>
+            </div>         
+        </div>
+        <div>
+            <label for="confirmar_senha">Confirmar Nova Senha:</label>
+            <div class="input-password">
+                <input id="senha" type="password" id="confirmar_senha" name="confirmar_senha" required>
+                <button id="mostrarSenha" class="ver-ocultar-senha" type="button"><img class="verocultar" src="../static/image/oculta-senha.png" alt="ver senha"> </button>
+            </div>
+        </div>
         <input type="submit" value="Redefinir Senha">
-    </div>
-
-
-    <a href="{{ url_for('login') }}">Já tem uma conta? Conecte-se!</a>
-
-    
-</form>
-
+    </form>
 </body>
+<script src="../static/js/index.js"></script>
 </html>

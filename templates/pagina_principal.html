@@ -12,11 +12,5 @@
     </form>
     <h1>{{ conteudo_personalizado }}</h1>
 </body>
-<script>
-    history.pushState(null, null, 'pagina_nao_autenticada');
-    window.addEventListener('popstate', function () {
-        history.pushState(null, null, 'pagina_nao_autenticada');
-    });
-</script>
-
+<script src="../static/js/index.js"></script>
 </html>

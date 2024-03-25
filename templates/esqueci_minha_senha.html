@@ -11,13 +11,13 @@
 <form action="/esqueci_minha_senha" method="post" class="forms">
     <div class="forms-esqueceu-titulo">
         <h1>Esqueceu sua Senha?</h1>
-        <p>Nós entendemos, coisas acontecem. Basta inserir seu <b>nome e sobrenome</b>  abaixo e iremos redefinir sua senha!</p>
+        <p>Nós entendemos, coisas acontecem. Basta inserir seu <b>email</b>  abaixo e iremos redefinir sua senha!</p>
     </div>
 
     <div class="forms-esqueceu-inputs">
-        <label for="nome_usuario">Nome e sobrenome:</label>
-        <input placeholder="Insira seu nome e sobrenome" type="text" name="nome_usuario" required><br>   
-        <input type="submit" value="Verificar nome">
+        <label for="nome_usuario">E-mail:</label>
+        <input placeholder="Insira seu e-mail" type="email" name="email" required><br>   
+        <input type="submit" value="Enviar senha">
     </div>
 
     <div class="forms-esqueceu-links">
@@ -32,8 +32,6 @@
         <a href="{{ url_for('login') }}">Já tem uma conta? Conecte-se!</a>
     </div>
 </form>
-
-
-
 </body>
+<script src="../static/js/index.js"></script>
 </html>

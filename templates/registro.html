@@ -1,59 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cadastrar Uusário - Reprografia</title>
     <link href="../static/css/login.css" rel="stylesheet" />
-</head>
-<body>
+  </head>
+  <body>
+    <form action="/registro" method="post" class="forms2">
+      <h1>Crie a sua conta aqui!</h1>
 
-<form action="/registro" method="post" class="forms2">
-
-    <h1>Crie a sua conta aqui!</h1>
-
-    <div class="forms2-line">
-        <div class="forms2-line-box1">
-            <label for="nome">Nome e sobrenome:</label>
-            <input placeholder="Nome e sobrenome" type="text" name="nome" required><br>
-        </div>
-        <div class="forms2-line-box2">
+      <div class="forms2-line2">
+        <div class="forms2-line">
+          <div class="forms2-line-box1">
+            <label for="nome">Usuário:</label>
+            <input placeholder="Usuário" type="text" name="nome" required />
+          </div>
+          <div class="forms2-line-box2">
             <label for="identificacao">Matrícula:</label>
-            <input placeholder="Matrícula" type="number" name="identificacao" required><br>
+            <input
+              placeholder="Matrícula"
+              type="number"
+              name="identificacao"
+              required
+            />
+          </div>
         </div>
-    </div>
-    
-    <div class="forms2-line2">
         <label for="funcao">Função:</label>
         <select name="funcao">
-            {% for opcao in opcoes_funcao %}
-                <option value="{{ opcao }}">{{ opcao }}</option>
-            {% endfor %}
-        </select><br>
+          {% for opcao in opcoes_funcao %}
+          <option value="{{ opcao }}">{{ opcao }}</option>
+          {% endfor %}
+        </select>
+
+        <label for="email">E-mail:</label>
+        <input
+          placeholder="Digite seu e-mail"
+          type="email"
+          name="email"
+          required
+        />
 
         <label for="senha">Senha:</label>
-        <input placeholder="Senha" type="password" name="senha" required><br>
+        <div class="input-password">
+          <input id="senha" placeholder="Senha" type="password" name="senha" required />
+          <button id="mostrarSenha" class="ver-ocultar-senha" type="button"><img class="verocultar" src="../static/image/oculta-senha.png" alt="ver senha"> </button>
+        </div>
 
-        <input type="submit" value="Registrar">
-    </div>
-    <div class="forms2-line3">
-
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <div class="flash-messages">
-                    {% for message in messages %}
-                        <p style="color: red;">{{ message }}</p>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
+        <input style="margin-top: 10px" type="submit" value="Registrar" />
+      </div>
+      <div class="forms2-line3">
+        {% with messages = get_flashed_messages() %} {% if messages %}
+        <div style="text-align: center; font-size: 14px" class="flash-messages">
+          {% for message in messages %}
+          <p style="color: red">{{ message }}</p>
+          {% endfor %}
+        </div>
+        {% endif %} {% endwith %}
 
         <a href="{{ url_for('esqueci_minha_senha') }}">Esqueceu a senha?</a>
 
         <a href="{{ url_for('login') }}">Já tem uma conta? Conecte-se!</a>
-    </div>
-    
-</form>
-
-</body>
+      </div>
+    </form>
+  </body>
+  <script src="../static/js/index.js"></script>
 </html>
