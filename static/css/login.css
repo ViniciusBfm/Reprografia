@@ -62,8 +62,8 @@ body {
     255,
     255,
     0.74
-  ); /* Cor de fundo com transparência para o efeito de vidro */
-  backdrop-filter: blur(5px); /* Aplica o efeito de desfoque */
+  ); 
+  backdrop-filter: blur(5px);
   border-radius: 8px;
   -webkit-box-shadow: 6px 6px 15px -6px rgba(0, 0, 0, 0.71);
   box-shadow: 6px 6px 15px -6px rgba(0, 0, 0, 0.71);

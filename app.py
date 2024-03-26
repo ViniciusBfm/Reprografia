@@ -197,7 +197,7 @@ def logout():
 # Rota para o formulário de registro
 @app.route('/registro', methods=['GET', 'POST'])
 def registro():
-    opcoes_funcao = ["Professor", "Coordenação", "Reprografia", "Admin"]
+    opcoes_funcao = ["Professor", "Coordenação", "Reprografia"]
 
     if request.method == 'POST':
         nome = request.form['nome'].lower()
